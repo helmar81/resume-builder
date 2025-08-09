@@ -1,0 +1,21 @@
+/* ResumePreview.css */
+
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #resume-preview {
+    page-break-after: auto;
+    page-break-before: auto;
+    page-break-inside: avoid;
+  }
+
+  .break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+

@@ -4,6 +4,8 @@
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
+
+
 export default function PDFExportButton() {
   const exportPDF = async () => {
     const previewElement = document.getElementById('resume-preview');

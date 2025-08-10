@@ -1,0 +1,10 @@
+{
+  "projects": {
+    "default": "resume-vibes",
+    "staging": "resume-vibes",
+    "deploy": "resume-vibes",
+    "update": "resume-vibes"
+  },
+  "targets": {},
+  "etags": {}
+}

@@ -1,7 +1,6 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
 
 declare global {
     interface Window {
@@ -10,26 +9,6 @@ declare global {
 }
 
 export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_ID: string }) {
-    const [hasConsent, setHasConsent] = useState(false); // Assume this state is updated by a cookie banner
-
-    useEffect(() => {
-        // This is a placeholder. You would have a real cookie banner logic here
-        // For example, reading a cookie to check if the user has consented.
-        const userConsent = localStorage.getItem('user-consent');
-        if (userConsent === 'granted') {
-            setHasConsent(true);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (hasConsent) {
-            // Update the consent status to 'granted'
-            window.gtag('consent', 'update', {
-                'analytics_storage': 'granted'
-            });
-        }
-    }, [hasConsent]);
-
     return (
         <>
             <Script strategy="afterInteractive" 
@@ -40,12 +19,15 @@ export default function GoogleAnalytics({ GA_MEASUREMENT_ID }: { GA_MEASUREMENT_
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
 
-                // Set default consent to 'denied'
+                // Check for user's stored consent and set it.
+                // If no consent is stored, set default to 'denied'.
+                const hasMadeChoice = localStorage.getItem('cookie-consent');
+                const analyticsConsent = hasMadeChoice === 'true' ? 'granted' : 'denied';
+
                 gtag('consent', 'default', {
-                    'analytics_storage': 'denied'
+                    'analytics_storage': analyticsConsent
                 });
                 
-                // Configure Google Analytics with your Measurement ID
                 gtag('config', '${GA_MEASUREMENT_ID}', {
                     page_path: window.location.pathname,
                 });

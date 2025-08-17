@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Resume Builder",
     description: "Create your Resume/CV for free",
-    url: "https://resume-vibes.web.app",
+    
     siteName: "Resume Builder",
     images: [
       {
